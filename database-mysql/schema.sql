@@ -6,7 +6,7 @@ USE Video_Inventory;
 
 CREATE TABLE Main (
   id int NOT NULL AUTO_INCREMENT,
-  video_url integer NOT NULL,
+  video_url varchar(255) NOT NULL,
   published_at varchar(255) NOT NULL,
   channel_id varchar(255) NOT NULL,
   title varchar(255) NOT NULL,
@@ -26,12 +26,12 @@ CREATE TABLE Main (
 
 CREATE TABLE Statistics (
   id int NOT NULL AUTO_INCREMENT,
-  video_id integer NOT NULL,
   view_count integer NOT NULL,
   like_count integer NOT NULL,
   dislike_count integer NOT NULL,
   favorite_count integer NOT NULL,
   comment_count integer NOT NULL,
+  video_id integer NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
@@ -40,8 +40,8 @@ CREATE TABLE Statistics (
 
 CREATE TABLE Tags (
   id int NOT NULL AUTO_INCREMENT,
-  video_id integer NOT NULL,
   tag varchar(255) NOT NULL,
+  video_id integer NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID),
@@ -51,5 +51,5 @@ CREATE TABLE Tags (
 
 
 /*  Execute this file from the command line by typing:
- *    mysql -u root < server/schema.sql
+ *    mysql -u begona < server/schema.sql
  *  to create the database and the tables.*/
