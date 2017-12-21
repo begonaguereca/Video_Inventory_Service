@@ -49,6 +49,7 @@ app.post('/upload', (req, res) => {
 //Route to query an existing video length
 app.get('/time', (req, res) => {
 //  var video_id = req.body.video_id;
+
   var video_id = 20;
   //Checking to see if ID is already in cashe
   client.getAsync(video_id)
@@ -89,3 +90,22 @@ var generatorURL = () => {
   }
   return 'https://www.youtube.com/watch?v=' + text;
 }
+//////////////////////////PREVIOUSWORK///////////////////////////////
+
+///////////////ROUTE WITHOUT REDIS ////////////
+// app.get('/time', (req, res) => {
+//   //var video_id = req.body.id;
+//   var video_id = 10;
+//
+//   db.retrieveVideoLength(video_id, (err, data) => {
+//     if(err) {
+//       console.log(err)
+//       res.sendStatus(500);
+//     } else {
+//       var videoObj = data[0];
+//       videoObj['video_id'] = video_id;
+//       res.send(videoObj);
+//     }
+//   });
+// });
+//
