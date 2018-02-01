@@ -9,6 +9,8 @@ data/
 # OS X
 .DS_Store
 
+./server/keys.js
+
 # Logs
 logs
 *.log

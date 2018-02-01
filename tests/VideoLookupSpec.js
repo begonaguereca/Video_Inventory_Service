@@ -51,7 +51,7 @@ describe('Video Duration retrieval', function() {
     request(options, function(error, res, body) {
       expect(body).to.exist;
       expect(body.duration).to.equal('1918');
-      expect(body.video_id).to.equal(20);    
+      expect(body.video_id).to.equal(20);
       done();
     });
   });

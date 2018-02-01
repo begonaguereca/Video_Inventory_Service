@@ -20,16 +20,21 @@
   },
   "dependencies": {
     "JSONStream": "^1.3.1",
+    "aws-sdk": "^2.174.0",
     "axios": "^0.17.1",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
+    "elastic-apm-node": "^0.9.0",
     "event-stream": "^3.3.4",
     "express": "^4.16.2",
     "express-status-monitor": "^1.0.1",
     "express-winston": "^2.4.0",
     "graceful-fs": "^4.1.11",
     "mysql": "^2.15.0",
+    "newrelic": "^2.4.2",
     "redis": "^2.8.0",
+    "sqs-consumer": "^3.8.0",
+    "sqs-producer": "^1.6.2",
     "winston": "^2.4.0",
     "winston-elasticsearch": "^0.5.5"
   }

@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 var Promise = require('bluebird');
 
-var connection = mysql.createConnection({
+var pool = mysql.createPool({
   host     : 'localhost',
   user     : 'begona',
   password : 'begona',
@@ -9,13 +9,13 @@ var connection = mysql.createConnection({
 });
 
 
-connection.addVideo = (videoObj, callback) => {
+pool.addVideo = (videoObj, callback) => {
   var insertMainQuery = 'INSERT INTO main (video_url, published_at, channel_id, title, description, thumb_url, thumb_width, thumb_height, channel_title, category_id, duration) VALUES ?'
   var queryMainInput = [[videoObj.url, videoObj.snippet.publishedAt, videoObj.snippet.channelId, videoObj.snippet.title, videoObj.snippet.description, videoObj.snippet.thumbnails.url, videoObj.snippet.thumbnails.width, videoObj.snippet.thumbnails.height, videoObj.snippet.channelTitle, videoObj.snippet.categoryId, videoObj.snippet.duration]]
   var mainId = null;
 
  //Adding Data corresponding to Main Table
-  connection.query(insertMainQuery, [queryMainInput], (err, results, fields) => {
+  pool.query(insertMainQuery, [queryMainInput], (err, results, fields) => {
     if (err) {
       callback(err, null);
     } else {
@@ -24,15 +24,15 @@ connection.addVideo = (videoObj, callback) => {
       mainId = results.insertId;
 
       //Adding Data corresponding to Stats Table
-      connection.query(insertStatsQuery, [queryStatsInput], (err, results, fields) => {
+      pool.query(insertStatsQuery, [queryStatsInput], (err, results, fields) => {
         if (err) {
           callback(err, null);
         } else {
-          var insertStatsQuery = 'INSERT INTO Tags (video_id, tag) VALUES ?'
-          var queryStatsInput = [[mainId,videoObj.snippet.Tags]]
+          var insertTagsQuery = 'INSERT INTO Tags (video_id, tag) VALUES ?'
+          var TagsQuery = [[mainId,videoObj.snippet.Tags]]
 
           //Adding Data corresponding to Tags Table
-          connection.query(insertStatsQuery, [queryStatsInput], (err, results, fields) => {
+          pool.query(insertTagsQuery, [TagsQuery], (err, results, fields) => {
             if (err) {
               callback(err, null);
             } else {
@@ -45,19 +45,20 @@ connection.addVideo = (videoObj, callback) => {
   });
 };
 
-connection.retrieveVideoLength = (videoID, callback) => {
-  var selectQuery = 'SELECT duration FROM Main WHERE id = ?'
-  var queryInput = [[videoID]]
 
-  connection.query(selectQuery, [queryInput], (err, results, feilds) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, results);
-    }
-  });
-};
 
-// module.exports.addVideo = addVideo;
-// module.exports.retrieveVideoLength = retrieveVideoLength;
-module.exports = Promise.promisifyAll(connection);
+  pool.retrieveVideoLength = (videoID, callback) => {
+    var selectQuery = 'SELECT duration FROM Main WHERE id = ?'
+    var queryInput = [[videoID]]
+
+    pool.query(selectQuery, [queryInput], (err, results, feilds) => {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, results);
+      }
+    });
+  };
+
+
+module.exports = Promise.promisifyAll(pool);
