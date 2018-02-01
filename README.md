@@ -15,17 +15,18 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 # Table of Contents
 
-1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
+1. [Data Schema](#Data Schema)
+1. [Architecture diagram](#Architecture diagram)
+1. [Route: New Video to Upload](#Route: New Video to Upload)
+1. [Route: Video Length Request](#Route: Video Length Request)
 
 ## Requirements
 
-- Node 6.9.x
-- Redis 3.2.x
-- MySQL 9.6.x
+- Node 6.9.0
+- Redis 3.2.0
+- MySQL 2.15.0
 
 ## Data Schema 
 
@@ -43,7 +44,7 @@ A video upload request is dropped onto the Que by Front-End Service. The worker 
 
 <img width="544" alt="screen shot 2018-01-31 at 5 03 50 pm" src="https://user-images.githubusercontent.com/19557880/35655994-a2d56db2-06a9-11e8-9198-a623959eb518.png">
 
-## Video Length Request
+## Route: Video Length Request
 
 A video length request is dropped onto the Que by the Abandonment Calculator Service. The worker will check the Que and pick up a pending request. The request is then read from the Video Inventory database. The worker then drops a video length onto the Que and picks up any pending responses that needs to be sent to the Abandonment Calculator Service. 
 
