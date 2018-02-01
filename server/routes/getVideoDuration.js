@@ -3,7 +3,6 @@ const router = express.Router();
 const redis = require("redis"), client = redis.createClient();
 const db = require('../../database-mysql');
 const bluebird = require('bluebird');
-const amazonKeys = require('../keys.js');
 const Producer = require('sqs-producer');
 
 bluebird.promisifyAll(redis.RedisClient.prototype);
@@ -12,8 +11,8 @@ bluebird.promisifyAll(redis.Multi.prototype);
 const producer = Producer.create({
   queueUrl: 'https://sqs.us-east-2.amazonaws.com/558725748654/videoDuration',
   region: 'us-east-2',
-  accessKeyId: amazonKeys.keys.accessKeyId,
-  secretAccessKey: amazonKeys.keys.secretAccessKey
+  accessKeyId: process.env.keys.accessKeyId,
+  secretAccessKey: process.env.keys.secretAccessKey
 });
 
 //Query an existing video length
