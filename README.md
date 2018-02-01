@@ -17,10 +17,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 1. [Requirements](#requirements)
 1. [Development](#development)
-1. [Data Schema](#Data Schema)
-1. [Architecture diagram](#Architecture diagram)
-1. [Route: New Video to Upload](#Route: New Video to Upload)
-1. [Route: Video Length Request](#Route: Video Length Request)
+1. [Data Schema](#DataSchema)
+1. [Architecture diagram](#Architecturediagram)
+1. [Route: New Video to Upload](#Route:New Video to Upload)
+1. [Route: Video Length Request](#Route:Video Length Request)
 
 ## Requirements
 
