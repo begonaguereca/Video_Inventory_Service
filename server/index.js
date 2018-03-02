@@ -21,7 +21,6 @@ const getVideoDuration = require('./routes/getVideoDuration.js');
 
 
 //Routes
-app.use('/upload', uploadVideo);
 app.use('/time', getVideoDuration);
 
 
