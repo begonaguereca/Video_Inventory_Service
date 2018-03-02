@@ -23,9 +23,7 @@ const producer = Producer.create({
 });
 
 
-//Route to upload a new Video
-router.get('/', (req, res) => {
-  const id;
+const id;
 
 //Queue is polled continuously for new Videos using long polling
   const que = Consumer.create({
@@ -63,7 +61,6 @@ router.get('/', (req, res) => {
     });
     que.on('error', (err) => { console.log(err.message) });
     que.start();
-  });
 
 
 
