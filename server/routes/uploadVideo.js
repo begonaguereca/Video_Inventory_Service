@@ -34,10 +34,9 @@ const id;
 
       db.addVideoAsync(message)
       .then(data => {
-        message['video_id'] = a
         res.status(200).send();
 
-        //Sending Video Package to Client API Que
+        //Sending Video Package to Client API Queue
           producer.send([{
             id: data.insertId,
             body: JSON.stringify(message),
