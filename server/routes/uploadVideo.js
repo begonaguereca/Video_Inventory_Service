@@ -23,8 +23,6 @@ const producer = Producer.create({
 });
 
 
-const id;
-
 //Queue is polled continuously for new Videos using long polling
   const que = Consumer.create({
     queueUrl: 'https://sqs.us-east-2.amazonaws.com/558725748654/VideoUploadQue',
